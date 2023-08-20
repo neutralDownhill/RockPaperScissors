@@ -124,4 +124,5 @@ function reset () {
     cpuScore = 0;
     playerScoreDiv.innerText = playerScore;
     cpuScoreDiv.innerText = cpuScore;
+    message.innerText = 'Make your move!';
 }

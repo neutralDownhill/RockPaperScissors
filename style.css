@@ -1,10 +1,11 @@
 html, body {
     background: #97FEED;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
 header {
-    background: #0B666A;
+    background: #35A29F;
     padding: 50px;
     text-align: center;
 }
@@ -23,8 +24,8 @@ h1 {
 }
 
 button {
-    background-color: #071952;
-    border: 1px solid #0B666A;
+    background-color: #05373a;
+    border: 1px solid #071952;
     border-radius: 15px;
     font-size: 72px;
     margin: 0 5px;
@@ -45,23 +46,38 @@ button {
 }
 
 h2 {
+    color: #05373a;
     font-size: 48px;
 }
 
 #scores {
     display: flex;
     flex-wrap: wrap;
+    font-weight: bolder;
     gap: 10px;
     margin: 10px auto;
 }
 
 #scores > div {
-    border: 1px solid #0B666A;
     flex: 200px 1 0;
     font-size: 48px;
 }
 
+#scores > div > div {
+    border: 1px solid #0B666A;
+    border-radius: 0 0 15px 15px;
+    color: #0B666A;
+}
+
 #scores > div > div:first-child {
     background: #35A29F;
+    border-bottom: 0px;
+    border-radius: 15px 15px 0 0;
+    color: #97FEED;
     font-size: 32px;
+}
+
+#scores #roundsWon {
+    border: 0px;
+    color: #0B666A;
 }
