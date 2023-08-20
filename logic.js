@@ -5,10 +5,10 @@ let cpuRoundsWon = 0;
 const playerScoreDiv = document.querySelector('#playerScore');
 const cpuScoreDiv = document.querySelector('#cpuScore');
 let winMessage = 'You win!';
-let loseMessage = 'You lose!'
-let roundWinMessage = 'WINNER!!! Play again?'
-let roundLoseMessage = 'LOSER!!! Play again?'
-let tieMessage = 'Tie game! Play again.'
+let loseMessage = 'You lose!';
+let roundWinMessage = 'WINNER!!!';
+let roundLoseMessage = 'LOSER!!!';
+let tieMessage = 'Tie game! Play again.';
 let r = 'rock',
     p = 'paper',
     s = 'scissors';
@@ -28,7 +28,7 @@ function getcpuChoice() {
 }
 
 function playOneRound(e) {
-    let playerChoice = e.target.innerText.toLowerCase();
+    let playerChoice = e.target.id;
     let cpuChoice = getcpuChoice();
     console.log(playerChoice);
     console.log(cpuChoice);
