@@ -1,11 +1,21 @@
+let playerScore = 0;
+let cpuScore = 0;
+let playerRoundsWon = 0;
+let cpuRoundsWon = 0;
+const playerScoreDiv = document.querySelector('#playerScore');
+const cpuScoreDiv = document.querySelector('#cpuScore');
 let winMessage = 'You win!';
 let loseMessage = 'You lose!'
-let tieMessage = 'Tie game!'
-let r = 'Rock',
-    p = 'Paper',
-    s = 'Scissors';
+let roundWinMessage = 'WINNER!!! Play again?'
+let roundLoseMessage = 'LOSER!!! Play again?'
+let tieMessage = 'Tie game! Play again.'
+let r = 'rock',
+    p = 'paper',
+    s = 'scissors';
 
-function getComputerChoice() {
+const message = document.querySelector('#message');
+
+function getcpuChoice() {
     let randomChoice = Math.floor(Math.random() * 3);
 
     if (randomChoice === 0) {
@@ -17,83 +27,101 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt('Make a move.', 'Rock, Paper, or Scissors?');
-    playerChoice = playerChoice.toLowerCase();
-
-    while (playerChoice !== r.toLowerCase() && 
-        playerChoice !== p.toLowerCase() && 
-        playerChoice !== s.toLowerCase()) {
-            playerChoice = prompt('Make a move.', 'Rock, Paper, or Scissors?');
-    }
-
-    playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
-    return playerChoice;
-}
-
-function playOneRound() {
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
+function playOneRound(e) {
+    let playerChoice = e.target.innerText.toLowerCase();
+    let cpuChoice = getcpuChoice();
     console.log(playerChoice);
-    console.log(computerChoice);
+    console.log(cpuChoice);
 
-    while (playerChoice === computerChoice) {
-        console.log(tieMessage + ' Play again.');
-        playerChoice = getPlayerChoice();
-        console.log(playerChoice);
-        computerChoice = getComputerChoice();
-        console.log(computerChoice);
+    if (playerChoice === cpuChoice) {
+        message.innerText = tieMessage;
+        return;
     }
-
+    
     if (playerChoice === r) {
-        if (computerChoice === p) {
-            console.log(winMessage);
-            return winMessage;
-        } else if (computerChoice === s) {
-            console.log(loseMessage);
-            return loseMessage;
+        if (cpuChoice === p) {
+            playerWin();
+        } else if (cpuChoice === s) {
+            cpuWin();
         }
     } else if (playerChoice === p) {
-        if (computerChoice === r) {
-            console.log(winMessage);
-            return winMessage;
-        } else if (computerChoice === s) {
-            console.log(loseMessage);
-            return loseMessage;
+        if (cpuChoice === r) {
+            playerWin();
+        } else if (cpuChoice === s) {
+            cpuWin();
         }
     } else if (playerChoice === s) {
-        if (computerChoice === p) {
-            console.log(winMessage);
-            return winMessage;
-        } else if (computerChoice === r) {
-            console.log(loseMessage);
-            return loseMessage;
+        if (cpuChoice === p) {
+            playerWin();
+        } else if (cpuChoice === r) {
+            cpuWin();
         }
     }
 
     playerChoice = null;
-    computerChoice = null;
-}
+    cpuChoice = null;
 
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        if (playOneRound() === winMessage) {
-            playerScore++;
-        } else {
-            computerScore++;
-        }
-        console.log(playerScore);
-        console.log(computerScore);
+
+
+    if(playerScore === 5 || cpuScore === 5) {
+        const movesDiv = document.getElementById('moves');
+        movesDiv.style.display = 'none';
+
+        const playAgainDiv = document.getElementById('playAgain');
+        playAgainBtn.style.display = 'unset';
     }
 
-    console.log('End of game. ' + (playerScore > computerScore? winMessage: loseMessage));
+}
 
+function playerWin() {
+    const roundsWonDiv = document.getElementById('roundsWon');
 
+    playerScoreDiv.innerText = ++playerScore;
+    if(playerScore === 5) {
+        message.innerText = roundWinMessage;
+        roundsWonDiv.innerText = ++playerRoundsWon + ':' + cpuRoundsWon;
+    } else {
+        message.innerText = winMessage;
+    }
+}
+
+function cpuWin() {
+    //message.innerText = loseMessage;
+    //cpuScoreDiv.innerText = ++cpuScore;
+
+    const roundsWonDiv = document.getElementById('roundsWon');
+
+    cpuScoreDiv.innerText = ++cpuScore;
+    if(cpuScore === 5) {
+        message.innerText = roundLoseMessage;
+        roundsWonDiv.innerText = playerRoundsWon + ':' + ++cpuRoundsWon;
+    } else {
+        message.innerText = loseMessage;
+    }
 }
 
 
 
-game();
+const btns = document.querySelectorAll('#moves button');
+
+btns.forEach(btn => btn.addEventListener('click', playOneRound));
+
+const playAgainBtn = document.getElementById('playAgainBtn');
+
+playAgainBtn.addEventListener('click', () => {
+    const movesDiv = document.getElementById('moves');
+    movesDiv.style.display = 'initial';
+
+    const playAgainDiv = document.getElementById('playAgain');
+    playAgainBtn.style.display = 'none';
+
+    reset();
+})
+
+function reset () {
+    playerScore = 0;
+    cpuScore = 0;
+    playerScoreDiv.innerText = playerScore;
+    cpuScoreDiv.innerText = cpuScore;
+}
