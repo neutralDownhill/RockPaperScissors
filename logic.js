@@ -8,7 +8,7 @@ let winMessage = 'You win!';
 let loseMessage = 'You lose!';
 let roundWinMessage = 'WINNER!!!';
 let roundLoseMessage = 'LOSER!!!';
-let tieMessage = 'Tie game! Play again.';
+let tieMessage = 'Tie game!';
 let r = 'rock',
     p = 'paper',
     s = 'scissors';
@@ -30,14 +30,14 @@ function getcpuChoice() {
 function playOneRound(e) {
     let playerChoice = e.target.id;
     let cpuChoice = getcpuChoice();
-    console.log(playerChoice);
-    console.log(cpuChoice);
+
+    message.innerHTML = toEmoji(playerChoice) + ' 🆚 ' + toEmoji(cpuChoice) + '<br />';
 
     if (playerChoice === cpuChoice) {
-        message.innerText = tieMessage;
+        message.innerText += tieMessage;
         return;
     }
-    
+
     if (playerChoice === r) {
         if (cpuChoice === p) {
             playerWin();
@@ -74,15 +74,25 @@ function playOneRound(e) {
 
 }
 
+function toEmoji(move) {
+    if (move === 'rock') {
+        return '✊';
+    } else if (move === 'paper') {
+        return '✋';
+    } else {
+        return '✌';
+    }
+}
+
 function playerWin() {
     const roundsWonDiv = document.getElementById('roundsWon');
-
     playerScoreDiv.innerText = ++playerScore;
     if(playerScore === 5) {
-        message.innerText = roundWinMessage;
+        
+        message.innerText += roundWinMessage;
         roundsWonDiv.innerText = ++playerRoundsWon + ':' + cpuRoundsWon;
     } else {
-        message.innerText = winMessage;
+        message.innerText += winMessage;
     }
 }
 
@@ -94,10 +104,10 @@ function cpuWin() {
 
     cpuScoreDiv.innerText = ++cpuScore;
     if(cpuScore === 5) {
-        message.innerText = roundLoseMessage;
+        message.innerText += roundLoseMessage;
         roundsWonDiv.innerText = playerRoundsWon + ':' + ++cpuRoundsWon;
     } else {
-        message.innerText = loseMessage;
+        message.innerText += loseMessage;
     }
 }
 

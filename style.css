@@ -31,7 +31,7 @@ h1 {
 @media only screen and (min-width: 600px) {
 
     #container {
-        max-height: 600px;
+        max-height: 650px;
     }
 
 }
@@ -41,6 +41,8 @@ h1 {
 }
 
 #theGame {
+    font-family: 'Noto Color Emoji', sans-serif;
+    font-family: 'Roboto', sans-serif;
     padding: 10px 0;
     text-align: center;
 }
