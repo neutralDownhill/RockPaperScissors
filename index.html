@@ -12,27 +12,29 @@
 </head>
 <body>
     <header>
-        <h1>Rock Paper Scissors</h1>
+        <h1>rock · paper · scissors</h1>
     </header>
-    <h2 id="message">Make your move!</h2>
-    <div id="theGame">
-        <div id="moves">
-            <button id="rock">✊</button>
-            <button id="paper">✋</button>
-            <button id="scissors">✌</button>
+    <div id="container">
+        <h2 id="message">Make your move!</h2>
+        <div id="scores">
+            <div>
+                <div>You</div>
+                <div id="playerScore">0</div>
+            </div>
+            <div>
+                <div>CPU</div>
+                <div id="cpuScore">0</div>
+            </div>
+            <div id="roundsWon">0:0</div>
         </div>
-        <button id="playAgainBtn">🔄</button>
-    </div>
-    <div id="scores">
-        <div>
-            <div>You</div>
-            <div id="playerScore">0</div>
+        <div id="theGame">
+            <div id="moves">
+                <button id="rock">✊</button>
+                <button id="paper">✋</button>
+                <button id="scissors">✌</button>
+            </div>
+            <button id="playAgainBtn">🔄</button>
         </div>
-        <div>
-            <div>CPU</div>
-            <div id="cpuScore">0</div>
-        </div>
-        <div id="roundsWon">0:0</div>
     </div>
 </body>
 </html>
